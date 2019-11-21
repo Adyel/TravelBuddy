@@ -26,10 +26,11 @@ sealed class Screen {
     object Home : Screen()
     data class Article(val postId: String) : Screen()
     object Interests : Screen()
+    object LogOut: Screen()
 }
 
 @Model
-object JetnewsStatus {
+object TravelAppStatus {
     var currentScreen: Screen = Screen.Home
     val favorites = ModelList<String>()
     val selectedTopics = ModelList<String>()
@@ -39,5 +40,5 @@ object JetnewsStatus {
  * Temporary solution pending navigation support.
  */
 fun navigateTo(destination: Screen) {
-    JetnewsStatus.currentScreen = destination
+    TravelAppStatus.currentScreen = destination
 }

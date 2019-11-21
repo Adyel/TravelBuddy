@@ -44,7 +44,7 @@ import io.github.adyel.travelapp.R
 import io.github.adyel.travelapp.data.people
 import io.github.adyel.travelapp.data.publications
 import io.github.adyel.travelapp.data.topics
-import io.github.adyel.travelapp.ui.JetnewsStatus
+import io.github.adyel.travelapp.ui.TravelAppStatus
 import io.github.adyel.travelapp.ui.VectorImageButton
 
 private enum class Sections(val title: String) {
@@ -196,12 +196,12 @@ private fun TopicDivider() {
 
 private fun getTopicKey(tab: String, group: String, topic: String) = "$tab-$group-$topic"
 
-private fun isTopicSelected(key: String) = JetnewsStatus.selectedTopics.contains(key)
+private fun isTopicSelected(key: String) = TravelAppStatus.selectedTopics.contains(key)
 
 private fun selectTopic(key: String, select: Boolean) {
     if (select) {
-        JetnewsStatus.selectedTopics.add(key)
+        TravelAppStatus.selectedTopics.add(key)
     } else {
-        JetnewsStatus.selectedTopics.remove(key)
+        TravelAppStatus.selectedTopics.remove(key)
     }
 }

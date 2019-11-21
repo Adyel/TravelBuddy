@@ -25,23 +25,11 @@ import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.CrossAxisAlignment
-import androidx.ui.layout.HeightSpacer
-import androidx.ui.layout.LayoutSize
-import androidx.ui.layout.Padding
-import androidx.ui.layout.Row
-import androidx.ui.layout.WidthSpacer
-import androidx.ui.material.Button
-import androidx.ui.material.Divider
-import androidx.ui.material.DrawerState
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.ModalDrawerLayout
-import androidx.ui.material.TextButtonStyle
+import androidx.ui.layout.*
+import androidx.ui.material.*
 import androidx.ui.material.surface.Surface
-import androidx.ui.material.themeColor
-import androidx.ui.material.themeTextStyle
 import androidx.ui.tooling.preview.Preview
+import com.google.firebase.auth.FirebaseAuth
 import io.github.adyel.travelapp.R
 import io.github.adyel.travelapp.ui.article.ArticleScreen
 import io.github.adyel.travelapp.ui.home.HomeScreen
@@ -63,7 +51,7 @@ fun TravelApp() {
             gesturesEnabled = drawerState == DrawerState.Opened,
             drawerContent = {
                 AppDrawer(
-                    currentScreen = JetnewsStatus.currentScreen,
+                    currentScreen = TravelAppStatus.currentScreen,
                     closeDrawer = { onDrawerStateChange(DrawerState.Closed) }
                 )
             },
@@ -74,12 +62,13 @@ fun TravelApp() {
 
 @Composable
 private fun AppContent(openDrawer: () -> Unit) {
-    Crossfade(JetnewsStatus.currentScreen) { screen ->
+    Crossfade(TravelAppStatus.currentScreen) { screen ->
         Surface(color = +themeColor { background }) {
             when (screen) {
                 is Screen.Home -> HomeScreen { openDrawer() }
                 is Screen.Interests -> InterestsScreen { openDrawer() }
                 is Screen.Article -> ArticleScreen(postId = screen.postId)
+                is Screen.LogOut -> FirebaseAuth.getInstance().signOut()
             }
         }
     }
@@ -121,6 +110,15 @@ private fun AppDrawer(
             isSelected = currentScreen == Screen.Interests
         ) {
             navigateTo(Screen.Interests)
+            closeDrawer()
+        }
+
+        DrawerButton(
+            icon = R.drawable.ic_back,
+            label = "Sign Out",
+            isSelected = currentScreen == Screen.LogOut
+        ) {
+            navigateTo(Screen.LogOut)
             closeDrawer()
         }
     }
