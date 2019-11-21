@@ -34,7 +34,7 @@ import androidx.ui.material.withOpacity
 import androidx.ui.res.imageResource
 import io.github.adyel.travelapp.R
 import io.github.adyel.travelapp.model.Post
-import io.github.adyel.travelapp.ui.JetnewsStatus
+import io.github.adyel.travelapp.ui.TravelAppStatus
 import io.github.adyel.travelapp.ui.Screen
 import io.github.adyel.travelapp.ui.VectorImage
 import io.github.adyel.travelapp.ui.navigateTo
@@ -159,7 +159,7 @@ fun BookmarkButton(
 }
 
 fun toggleBookmark(postId: String) {
-    with(JetnewsStatus) {
+    with(TravelAppStatus) {
         if (favorites.contains(postId)) {
             favorites.remove(postId)
         } else {
@@ -168,4 +168,4 @@ fun toggleBookmark(postId: String) {
     }
 }
 
-fun isFavorite(postId: String) = JetnewsStatus.favorites.contains(postId)
+fun isFavorite(postId: String) = TravelAppStatus.favorites.contains(postId)
